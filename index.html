@@ -1,50 +1,73 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>leaflet-map-simple</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <title>Leaflet Storymaps with Google Sheets Template</title>
 
-  <!-- Load Leaflet code library: see https://leafletjs.com/download.html -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
-  <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+  <!-- Load Leaflet CSS and JS-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
 
-  <!-- Position the map and title with Cascading Style Sheet (CSS) -->
-  <style>
-  body { margin:0; padding:0; }
-  #map { position: absolute; top:0; bottom:0; right:0; left:0; }
-  #map-title { position: relative; margin-top: 10px; margin-left: 50px; float: left; background: white; border: 2px solid rgba(0,0,0,0.2); padding: 6px 8px; font-family: Helvetica; font-weight: bold; font-size: 24px; z-index: 800; }
-  </style>
+  <!-- Load Leaflet basemap providers -->
+  <script src="https://unpkg.com/leaflet-providers@1.10.2/leaflet-providers.js"></script>
+
+  <!-- Load jQuery  -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+
+  <!-- Load PapaParse -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+
+  <!-- Load Lightbox -->
+  <script src="scripts/lightbox/js/lightbox.js"></script>
+  <link rel="stylesheet" href="scripts/lightbox/css/lightbox.css" />
+
+  <!-- Load Font-Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link rel="stylesheet" href="markers/leaflet.extra-markers.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style-desktop.css">
+  <link rel="stylesheet" href="css/loader.css">
 </head>
+
 <body>
 
-  <!-- Display the map and title with HTML division tags  -->
-  <div id="map-title">Cam's Map</div>
+  <div id="title">
+    <div id="logo"></div>
+    <div id="header"></div>
+  </div>
+
+  <div id="narration">
+    <div id="contents">
+      <div id="top"></div>
+    </div>
+  </div>
+
+  <div class="loader">Loading...</div>
   <div id="map"></div>
 
-  <!-- Create the interactive map content with JavaScript (.js) -->
-  <script>
-
-  /* Set up the initial map center and zoom level */
-  var map = L.map('map', {
-    center: [41.77, -72.69], // EDIT coordinates to re-center map
-    zoom: 9,  // EDIT from 1 (zoomed out) to 18 (zoomed in)
-    scrollWheelZoom: false
-  });
-
-  /* display basemap tiles -- see others at https://leaflet-extras.github.io/leaflet-providers/preview/ */
- L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-  }).addTo(map);
-    
-  /* Display a point marker with pop-up text */
-  L.marker([41.37, -72.10]).addTo(map) // EDIT marker coordinates
-  .bindPopup("Connecticut College"); // EDIT pop-up text message   
-    L.marker([41.74, -72.69]).addTo(map)
-  .bindPopup("Trinity College");
-     L.marker([41.54, -72.66]).addTo(map)
-  .bindPopup("Wesleyan University");
-	  
+  <script type="text/javascript">
+    // Create the Leaflet map with a generic start point
+    var map = L.map('map', {
+      center: [0, 0],
+      zoom: 1,
+      scrollWheelZoom: false,
+      zoomControl: false,
+      tap: false
+    });
   </script>
+
+  <script type="text/javascript" src="google-doc-url.js"></script>
+  <script type="text/javascript" src="markers/leaflet.extra-markers.min.js"></script>
+  <script type="text/javascript" src="scripts/constants.js"></script>
+  <script type="text/javascript" src="scripts/jquery.csv.js"></script>
+  <script type="text/javascript" src="scripts/storymap.js"></script>
+
 </body>
 </html>
